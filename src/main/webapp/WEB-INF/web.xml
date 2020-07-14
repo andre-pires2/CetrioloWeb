@@ -7,7 +7,7 @@
   
   <servlet>
  	<servlet-name>mainServlet</servlet-name>
- 		<servlet-class>br.gov.sp.fatec.cetrioloweb.controller.MainController</servlet-class>
+ 		<servlet-class>dream.team.app.cetrioloweb.controller.MainController</servlet-class>
  	</servlet>
  <servlet-mapping>
 	 <servlet-name>mainServlet</servlet-name>
