@@ -24,10 +24,7 @@ public class CorsFilter implements Filter {
         // Autoriza
         HttpServletResponse resposta = (HttpServletResponse) response;
         resposta.addHeader("Access-Control-Allow-Origin", "*");
-        
-        resposta.addHeader("Access-Control-Allow-Methods",
-                "GET, OPTIONS, HEAD, PUT, POST, DELETE");
-        
+     
         resposta.addHeader("Access-Control-Allow-Headers","*");
         
         // Para requisicoes com metodo OPTIONS
@@ -49,6 +46,6 @@ public class CorsFilter implements Filter {
     @Override
     public void init(FilterConfig config) throws ServletException {
         this.context = config.getServletContext();
-        this.context.log("Filtro inicializado!");
+        this.context.log("CORS - Filtro inicializado!");
     }
 }

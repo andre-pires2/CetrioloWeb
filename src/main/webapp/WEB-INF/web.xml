@@ -18,7 +18,7 @@
 	<filter>
 		<filter-name>authFilter</filter-name>
 		<filter-class>dream.team.app.cetrioloweb.controller.AuthFilter</filter-class>
-		<init-param>
+  		<init-param>
 			<param-name>username</param-name>
 			<param-value>admin</param-value>
 		</init-param>

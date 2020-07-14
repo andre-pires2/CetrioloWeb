@@ -26,7 +26,7 @@ public class AuthFilter implements Filter {
 	
 	private ServletContext context;
     private String username = "admin";
-    private String password = "";
+    private String password = "s3nhaBr@ba";
     private String realm = "PROTECTED";
 
 
@@ -64,6 +64,16 @@ public class AuthFilter implements Filter {
                                     credentials.substring(0, p).trim();
                             String _password = 
                                     credentials.substring(p + 1).trim();
+                            
+                            if (!_username.equals("admin")) {
+                                this.context.log("Não é o admin!!!!");
+                                resposta.addHeader("Access-Control-Allow-Methods",
+                                        "GET, OPTIONS, HEAD, POST");
+                            } else {
+                            	this.context.log("É o admin!!!!");
+                                resposta.addHeader("Access-Control-Allow-Methods",
+                                        "GET, OPTIONS, HEAD, PUT, POST, DELETE");
+                            }
                             // Se nao bate com configuracao retorna erro
                             if (!username.equals(_username) || 
                                     !password.equals(_password)) {
@@ -94,12 +104,8 @@ public class AuthFilter implements Filter {
 	
 	@Override
 	public void init(FilterConfig config) throws ServletException {
-		this.context = config.getServletContext();
-		this.context.log("Filtro inicializado!");
         this.context = config.getServletContext();
-        this.context.log("Filtro inicializado!");
-        this.username = config.getInitParameter("username");
-        this.password = config.getInitParameter("password");
+        this.context.log("Auth - Filtro inicializado!");
         String paramRealm = config.getInitParameter("realm");
         if (paramRealm != null && paramRealm.length() > 0) {
             this.realm = paramRealm;
