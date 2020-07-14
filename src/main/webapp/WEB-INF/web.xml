@@ -3,14 +3,14 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
-  
-  <servlet>
- 	<servlet-name>mainServlet</servlet-name>
- 		<servlet-class>dream.team.app.cetrioloweb.controller.MainController</servlet-class>
- 	</servlet>
- <servlet-mapping>
-	 <servlet-name>mainServlet</servlet-name>
-	 <url-pattern>/main</url-pattern>
- </servlet-mapping>
+	<display-name>Archetype Created Web Application</display-name>
+
+	<servlet>
+		<servlet-name>mainServlet</servlet-name>
+		<servlet-class>dream.team.app.cetrioloweb.controller.MainController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mainServlet</servlet-name>
+		<url-pattern>/main</url-pattern>
+	</servlet-mapping>
 </web-app>
