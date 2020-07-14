@@ -13,4 +13,13 @@
 		<servlet-name>mainServlet</servlet-name>
 		<url-pattern>/main</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>alunoServlet</servlet-name>
+		<servlet-class>dream.team.app.cetrioloweb.controller.AlunoController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>alunoServlet</servlet-name>
+		<url-pattern>/aluno</url-pattern>
+	</servlet-mapping>
 </web-app>

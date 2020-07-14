@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table (name = "alu_aluno")
 @PrimaryKeyJoinColumn(name = "alu_id")
@@ -21,11 +23,13 @@ public class Aluno extends Usuario {
 	private String curso;
 	
 	//bd: fk para orientador
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ori_usu_id")
 	private Orientador orientador;
 	
 	//bd: interseccao com N-N ama_aluno_materias
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 		name = "ama_aluno_materia",
