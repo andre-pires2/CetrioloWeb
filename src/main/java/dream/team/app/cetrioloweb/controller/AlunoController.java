@@ -96,4 +96,25 @@ public class AlunoController extends HttpServlet {
 			throw e;
 		}
 	}
+	
+	@Override
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
+			Long id = Long.valueOf(req.getParameter("id"));
+			AlunoDao alunoDao = new AlunoDao();
+			alunoDao.deleteAluno(id);
+			resp.setContentType("application/json");
+			resp.setCharacterEncoding("UTF-8");
+			resp.setStatus(200);
+		} catch (Exception e) {
+			resp.setContentType("application/json");
+			resp.setCharacterEncoding("UTF-8");
+			resp.setStatus(400);
+			PrintWriter out = resp.getWriter();
+			out.print(e);
+			out.flush();
+			throw e;
+		}
+		
+	}
 }
