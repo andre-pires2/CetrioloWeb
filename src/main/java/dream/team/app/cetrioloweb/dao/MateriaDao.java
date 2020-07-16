@@ -44,12 +44,12 @@ public class MateriaDao {
 		}
 	}
 	
-	public List<Materia> executeQuery() {
-		System.out.println("-- executing query --");
+	public List<Materia> executeQuery(String nomeUsuario, String curso) {
+		System.out.println("-- executing query MATERIA --");
 		String queryText = "select m from Materia m inner join m.alunosCurso a where a.nomeUsuario = :nomeUsuario and a.curso = :curso";
 		TypedQuery<Materia> query = manager.createQuery(queryText, Materia.class);
-		query.setParameter("nomeUsuario", "Gabriel A");
-		query.setParameter("curso", "Matematica");
+		query.setParameter("nomeUsuario", nomeUsuario);
+		query.setParameter("curso", curso);
 		List<Materia> resultado = query.getResultList();
 		resultado.forEach(System.out::println);
         return resultado;

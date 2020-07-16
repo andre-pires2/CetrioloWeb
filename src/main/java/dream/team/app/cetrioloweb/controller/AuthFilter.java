@@ -15,6 +15,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dream.team.app.cetrioloweb.dao.UsuarioDao;
+
 /*
 Utilize autenticação básica (envio de usuário e senha em toda requisição)
 implementada com Filter e proíba a usuário sem autorização do tipo "ADMIN"
@@ -25,10 +27,10 @@ https://www.devmedia.com.br/controle-de-acesso-com-filtros/1720
 public class AuthFilter implements Filter { 
 	
 	private ServletContext context;
-    private String username = "admin";
-    private String password = "s3nhaBr@ba";
+    private String permissao;
+    private String senha;
     private String realm = "PROTECTED";
-
+    UsuarioDao usuarioDao = new UsuarioDao();
 
 	@Override
 	public void doFilter(
@@ -64,10 +66,28 @@ public class AuthFilter implements Filter {
                                     credentials.substring(0, p).trim();
                             String _password = 
                                     credentials.substring(p + 1).trim();
+
+                            try {
+
+                                senha = usuarioDao.searchUsuarioByEmail(_username).getSenha();
+                                permissao = usuarioDao.searchUsuarioByEmail(_username).getPermissao().getTipo();
+
+                            } catch (Exception e) {
+                                throw new Error("Usuário não existe", e);
+                            }
+
                             // Se nao bate com configuracao retorna erro
-                            if (!username.equals(_username) || 
-                                    !password.equals(_password)) {
+                            if (!senha.equals(_password)) {
                                 unauthorized(resposta, "Credenciais inválidas");
+                            }
+
+                            this.context.log(requisicao.getMethod());
+
+                            if (!permissao.equals("admin")) {
+                                if (requisicao.getMethod().equals("PUT") ||
+                                    requisicao.getMethod().equals("DELETE")) {
+                                        unauthorized(resposta, "Operação não permitida");
+                                }
                             }
                             // Prossegue com a requisicao
                             filterChain.doFilter(request, response);
@@ -83,8 +103,6 @@ public class AuthFilter implements Filter {
         } else {
             unauthorized(resposta);
         }
-		
-
 	}
 
 	@Override

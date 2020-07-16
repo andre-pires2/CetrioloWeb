@@ -44,14 +44,14 @@ public class AlunoDao {
 		}
 	}
 	
-    public List<Aluno> executeQuery() {
-        System.out.println("-- executing query --");
+    public List<Aluno> executeQuery(String nomeUsuario, String email) {
+        System.out.println("-- executing query ALUNO--");
         String queryText = "select a " +
                 "from Aluno a " +
                 "inner join a.orientador o where o.nomeUsuario = :nomeUsuario and o.email = :email";
         TypedQuery<Aluno> query = (TypedQuery<Aluno>) manager.createQuery(queryText, Aluno.class);
-        query.setParameter("nomeUsuario", "Bibiana");
-        query.setParameter("email", "bibiana@email.com");
+        query.setParameter("nomeUsuario", nomeUsuario);
+        query.setParameter("email", email);
         List<Aluno> resultado = query.getResultList();
         resultado.forEach(System.out::println);
         return resultado;
