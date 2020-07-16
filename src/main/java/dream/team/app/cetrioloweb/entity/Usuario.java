@@ -9,6 +9,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 @Entity
 @Table(name = "usu_usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -26,6 +30,7 @@ public abstract class Usuario extends GerarID {
     @Column(name="usu_telefone", length = 20)
     private String telefone;
     
+    @JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "usu_permissao")
 	private Permissao permissao;
@@ -62,6 +67,7 @@ public abstract class Usuario extends GerarID {
         this.telefone = telefone;
     }
 
+    @JsonIgnore
     public Permissao getPermissao() {
 		return permissao;
 	}

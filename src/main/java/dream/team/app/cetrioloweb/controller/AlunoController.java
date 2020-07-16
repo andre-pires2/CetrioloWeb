@@ -106,6 +106,9 @@ public class AlunoController extends HttpServlet {
 			resp.setContentType("application/json");
 			resp.setCharacterEncoding("UTF-8");
 			resp.setStatus(200);
+			PrintWriter out = resp.getWriter();
+			out.print("Usuario excluido com sucesso");
+			out.flush();
 		} catch (Exception e) {
 			resp.setContentType("application/json");
 			resp.setCharacterEncoding("UTF-8");
