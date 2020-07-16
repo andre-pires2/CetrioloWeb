@@ -10,6 +10,7 @@ version="2.0">
 	<class>dream.team.app.cetrioloweb.entity.Aluno</class>
 	<class>dream.team.app.cetrioloweb.entity.Materia</class>
 	<class>dream.team.app.cetrioloweb.entity.Orientador</class>
+	<class>dream.team.app.cetrioloweb.entity.Permissao</class>
 
 	<properties>
 
