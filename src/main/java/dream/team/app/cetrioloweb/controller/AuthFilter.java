@@ -64,16 +64,6 @@ public class AuthFilter implements Filter {
                                     credentials.substring(0, p).trim();
                             String _password = 
                                     credentials.substring(p + 1).trim();
-                            
-                            if (!_username.equals("admin")) {
-                                this.context.log("Não é o admin!!!!");
-                                resposta.addHeader("Access-Control-Allow-Methods",
-                                        "GET, OPTIONS, HEAD, POST");
-                            } else {
-                            	this.context.log("É o admin!!!!");
-                                resposta.addHeader("Access-Control-Allow-Methods",
-                                        "GET, OPTIONS, HEAD, PUT, POST, DELETE");
-                            }
                             // Se nao bate com configuracao retorna erro
                             if (!username.equals(_username) || 
                                     !password.equals(_password)) {
