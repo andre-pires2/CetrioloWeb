@@ -19,7 +19,8 @@ public class AlunoDao {
 	
 	public void createOrUpdateAluno(Aluno aluno) throws RollbackException {
 		try {
-			manager.getTransaction().begin();
+			if(!manager.getTransaction().isActive())
+				manager.getTransaction().begin();
 			if (aluno.getId() == null) {
 				manager.persist(aluno);
 			} else {
@@ -35,7 +36,8 @@ public class AlunoDao {
 	public void deleteAluno(Long alunoId) throws RollbackException {
 		Aluno aluno = this.searchAluno(alunoId);
 		try {
-			manager.getTransaction().begin();
+			if(!manager.getTransaction().isActive())
+				manager.getTransaction().begin();
 			manager.remove(aluno);
 			manager.getTransaction().commit();
 		} catch (RollbackException e) {
