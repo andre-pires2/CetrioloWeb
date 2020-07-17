@@ -88,9 +88,10 @@ public class AuthFilter implements Filter {
                                     requisicao.getMethod().equals("DELETE")) {
                                         unauthorized(resposta, "Operação não permitida");
                                 }
+                            } else {
+	                            // Prossegue com a requisicao
+	                            filterChain.doFilter(request, response);
                             }
-                            // Prossegue com a requisicao
-                            filterChain.doFilter(request, response);
                         } else {
                             unauthorized(resposta, 
                                     "Token inválido");
